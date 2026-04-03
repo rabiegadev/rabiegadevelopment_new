@@ -1,0 +1,21 @@
+image: node:22-bookworm
+
+variables:
+  AUTH_SECRET: "ci-build-auth-secret-min-32-chars-long!!"
+  DATABASE_URL: "postgresql://ci:ci@127.0.0.1:5432/ci"
+  NEXTAUTH_URL: "http://localhost:3000"
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}-npm
+  paths:
+    - node_modules/
+
+stages:
+  - verify
+
+verify:
+  stage: verify
+  script:
+    - npm ci
+    - npm run lint
+    - npm run build
