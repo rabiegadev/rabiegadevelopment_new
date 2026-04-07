@@ -5,6 +5,7 @@ const links = [
   { href: "/admin/inquiries", label: "Zapytania" },
   { href: "/admin/users", label: "Użytkownicy" },
   { href: "/admin/services", label: "Usługi" },
+  { href: "/admin/portfolio", label: "Portfolio" },
 ];
 
 export default function AdminLayout({

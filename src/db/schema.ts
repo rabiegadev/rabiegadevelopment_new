@@ -1,6 +1,7 @@
 import {
   boolean,
   integer,
+  jsonb,
   pgEnum,
   pgTable,
   text,
@@ -81,3 +82,39 @@ export const inquiries = pgTable("inquiries", {
     .defaultNow()
     .notNull(),
 });
+
+export const portfolioProjects = pgTable("portfolio_projects", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  slug: text("slug").notNull().unique(),
+  title: text("title").notNull(),
+  category: text("category").notNull(),
+  shortDescription: text("short_description"),
+  description: text("description"),
+  assumptions: text("assumptions"),
+  delivered: text("delivered"),
+  stack: jsonb("stack").$type<string[]>().notNull().default([]),
+  startedAt: timestamp("started_at", { withTimezone: true }),
+  heroImageUrl: text("hero_image_url").notNull(),
+  externalUrl: text("external_url"),
+  sortOrder: integer("sort_order").notNull().default(0),
+  isPublished: boolean("is_published").notNull().default(true),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+});
+
+export const portfolioProjectImages = pgTable(
+  "portfolio_project_images",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    projectId: uuid("project_id")
+      .references(() => portfolioProjects.id, { onDelete: "cascade" })
+      .notNull(),
+    imageUrl: text("image_url").notNull(),
+    sortOrder: integer("sort_order").notNull().default(0),
+    caption: text("caption"),
+  },
+);

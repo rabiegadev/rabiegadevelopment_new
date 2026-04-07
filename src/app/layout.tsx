@@ -15,11 +15,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Rabiega Development",
+    default: "Rabiega Development — Portfolio i kontakt",
     template: "%s | Rabiega Development",
   },
   description:
-    "Strony weselne, aplikacje na ślub i dla usługodawców, automatyzacje — Rabiega Development.",
+    "Aplikacje webowe dla MŚP, strony weselne, narzędzia biznesowe — Kamil Rabiega, Rabiega Development.",
   metadataBase: new URL("https://rabiegadevelopment.pl"),
 };
 

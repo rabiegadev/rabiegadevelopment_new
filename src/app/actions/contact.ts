@@ -39,17 +39,25 @@ export async function submitContactForm(
 
   const { name, email, phone, message } = parsed.data;
 
+  const projectContext = String(
+    formData.get("projectContext") ?? "",
+  ).trim();
+  const fullMessage =
+    projectContext.length > 0
+      ? `${projectContext}\n\n---\n\n${message}`
+      : message;
+
   await db.insert(inquiries).values({
     name,
     email,
     phone: phone || null,
-    message,
+    message: fullMessage,
     userId:
       session?.user?.role === "client" ? session.user.id : null,
   });
 
   try {
-    await sendContactEmails({ name, email, phone, message });
+    await sendContactEmails({ name, email, phone, message: fullMessage });
   } catch (e) {
     console.error("[contact] mail error", e);
   }

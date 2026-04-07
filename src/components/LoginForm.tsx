@@ -47,37 +47,40 @@ export function LoginForm() {
     router.refresh();
   }
 
+  const fieldClass =
+    "rounded-xl border border-violet-200 bg-violet-50/50 px-3 py-2.5 text-violet-950 placeholder:text-violet-400 outline-none transition focus:border-violet-500 focus:bg-white focus:ring-2 focus:ring-violet-400/50";
+
   return (
-    <form onSubmit={onSubmit} className="flex w-full max-w-md flex-col gap-4">
+    <form onSubmit={onSubmit} className="flex w-full flex-col gap-5">
       {error ? (
-        <p className="rounded-lg border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-200">
+        <p className="rounded-xl border border-red-300 bg-red-50 px-3 py-2 text-sm font-medium text-red-900">
           {error}
         </p>
       ) : null}
-      <label className="flex flex-col gap-1 text-sm">
-        <span className="text-slate-600 dark:text-white/70">E-mail</span>
+      <label className="flex flex-col gap-1.5 text-sm">
+        <span className="font-semibold text-violet-950">E-mail</span>
         <input
           name="email"
           type="email"
           required
           autoComplete="email"
-          className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 outline-none focus:ring-2 focus:ring-emerald-500/60 dark:border-white/15 dark:bg-white/5 dark:text-white"
+          className={fieldClass}
         />
       </label>
-      <label className="flex flex-col gap-1 text-sm">
-        <span className="text-slate-600 dark:text-white/70">Hasło</span>
+      <label className="flex flex-col gap-1.5 text-sm">
+        <span className="font-semibold text-violet-950">Hasło</span>
         <input
           name="password"
           type="password"
           required
           autoComplete="current-password"
-          className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 outline-none focus:ring-2 focus:ring-emerald-500/60 dark:border-white/15 dark:bg-white/5 dark:text-white"
+          className={fieldClass}
         />
       </label>
       <button
         type="submit"
         disabled={pending}
-        className="rounded-lg bg-emerald-600 px-4 py-2.5 font-medium text-white hover:bg-emerald-500 disabled:opacity-60"
+        className="mt-1 rounded-xl bg-violet-600 px-4 py-3 text-sm font-semibold text-white shadow-md shadow-violet-400/30 transition hover:bg-violet-500 disabled:opacity-60"
       >
         {pending ? "Logowanie…" : "Zaloguj"}
       </button>
